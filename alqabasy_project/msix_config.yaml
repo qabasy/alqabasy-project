@@ -1,0 +1,6 @@
+display_name: "AL-Qabasy Project"
+publisher_display_name: "M&T"
+identity_name: "com.M_T.ecommerce"
+version: "1.1.0.0"
+architecture: "x64"
+capabilities:

@@ -3,6 +3,7 @@ import 'package:sizer/sizer.dart';
 
 class SignupPage extends StatelessWidget {
   final sizedBoxHeight = 2.h, borderRadius = 16;
+  static const route = "/signup";
   @override
   Widget build(BuildContext context) {
     return Sizer(builder: (context, orientation, deviceType) {
@@ -48,11 +49,7 @@ class SignupPage extends StatelessWidget {
                             child: Text(
                               "SignUp",
                               style: TextStyle(
-                                  decoration: TextDecoration.combine([
-                                    TextDecoration.overline,
-                                    TextDecoration.lineThrough,
-                                    TextDecoration.underline
-                                  ]),
+                                  decoration: TextDecoration.combine([TextDecoration.overline, TextDecoration.lineThrough, TextDecoration.underline]),
                                   // backgroundColor: Colors.red,
                                   color: Colors.amber,
                                   fontSize: 10.sp),

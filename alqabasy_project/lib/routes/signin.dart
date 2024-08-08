@@ -1,34 +1,46 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:alqabasy_project/models/database.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
-Map<dynamic, dynamic> Settings = {
-  "Settings": {},
-  0: "d",
-  "0": {
-    String: {
-      {0}
-    }
-  }
-};
+class SignInScreen extends StatefulWidget {
+  const SignInScreen({super.key});
+  static const route = "/";
 
-class SignInPage extends StatelessWidget {
-//   const SignInPage({super.key});
+  @override
+  _SignInScreenState createState() => _SignInScreenState();
+}
 
+class _SignInScreenState extends State<SignInScreen> {
   final sizedBoxHeight = 2.h, borderRadius = 16;
+  final DatabaseService _databaseService = DatabaseService();
+  final _formKey = GlobalKey<FormState>();
+  final _usernameController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    _databaseService.close();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Sizer(builder: (context, orientation, deviceType) {
       return Scaffold(
         appBar: AppBar(
-          title: const Text('SignIn Page'),
+          title: const Text('AL-Qabasy Project'),
+          elevation: 5,
+          shadowColor: Colors.black,
+          leading: Icon(
+            Icons.auto_awesome,
+          ),
         ),
-        body: Padding(
-          padding: const EdgeInsets.only(left: 15, right: 15),
-          child: Center(
-            child: Container(
+        body: Form(
+          child: Padding(
+            padding: const EdgeInsets.only(left: 0, right: 0),
+            child: Center(
               child: SizedBox(
                 width: (deviceType == DeviceType.windows ? 50.w : 100.w),
                 height: 100.h,
@@ -64,6 +76,7 @@ class SignInPage extends StatelessWidget {
                               ),
                               SizedBox(height: sizedBoxHeight * 2),
                               TextFormField(
+                                  controller: _usernameController,
                                   decoration: InputDecoration(
                                     labelText: 'Username',
                                     border: OutlineInputBorder(
@@ -80,6 +93,7 @@ class SignInPage extends StatelessWidget {
                               // SizedBox(height: sizedBoxHeight),
                               SizedBox(height: sizedBoxHeight),
                               TextFormField(
+                                controller: _passwordController,
                                 decoration: InputDecoration(
                                   labelText: 'Password',
                                   border: OutlineInputBorder(
@@ -90,35 +104,32 @@ class SignInPage extends StatelessWidget {
                                 obscureText: true,
                               ),
                               const SizedBox(height: 16.0),
-                              Container(
-                                // width: 100.w,
-                                // height: 50,
-                                // color: Colors.red,
-                                child: Align(
-                                  // widthFactor: 10,
-                                  child: ElevatedButton(
-                                    autofocus: true,
-                                    onPressed: () {
-                                      Navigator.pushNamed(context, "/home");
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      // visualDensity: VisualDensity(vertical: .1),
-                                      elevation: 8,
-                                      padding: const EdgeInsets.symmetric(
-                                        vertical: 20.0,
-                                        horizontal: 35,
-                                      ),
+                              Align(
+                                // widthFactor: 10,
+                                child: ElevatedButton(
+                                  autofocus: true,
+                                  onPressed: () {
+                                    Navigator.pushNamed(context, "/home");
+                                    // }
+                                    // });
 
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                      ),
+                                    // Navigator.pushNamed(context, "/home");
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    // visualDensity: VisualDensity(vertical: .1),
+                                    elevation: 8,
+                                    padding: const EdgeInsets.symmetric(
+                                      vertical: 20.0,
+                                      horizontal: 35,
                                     ),
-                                    child: const Text(
-                                      'Login',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w900),
+
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8.0),
                                     ),
+                                  ),
+                                  child: const Text(
+                                    'Login',
+                                    style: TextStyle(fontWeight: FontWeight.w900),
                                   ),
                                 ),
                               ),

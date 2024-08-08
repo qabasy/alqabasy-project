@@ -1,4 +1,4 @@
-import 'package:expandable_datatable/expandable_datatable.dart';
+// import 'package:expandable_datatable/expandable_datatable.dart';
 import 'package:flutter/material.dart';
 
 class PurchasesScreen extends StatefulWidget {
@@ -33,61 +33,62 @@ class _PurchasesScreenState extends State<PurchasesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: ExpandableTheme(
-          data: ExpandableThemeData(
-            context,
-            // rowBorder: const BorderSide(color: Colors.amber),
-            // expandedBorderColor: Colors.transparent,
-            paginationSize: 48,
-          ),
-          child: ExpandableDataTable(
-            rows: [
-              ExpandableRow(cells: [
-                ExpandableCell(
-                  columnTitle: "ID",
-                  value: 10,
-                ),
-                ExpandableCell(
-                  columnTitle: "Car Serial",
-                  value: "1389 - ABC",
-                ),
-              ]),
-              ExpandableRow(
-                cells: [
-                  ExpandableCell(
-                    columnTitle: "ID",
-                    value: 10,
-                  ),
-                  ExpandableCell(
-                    columnTitle: "Car Serial",
-                    value: "1389 - ABC",
-                  ),
-                ],
-              ),
-            ],
-            headers: [
-              ExpandableColumn<int>(
-                columnTitle: "ID",
-                columnFlex: 1,
-              ),
-              ExpandableColumn<String>(
-                columnTitle: "Car Serial",
-                columnFlex: 2,
-              ),
-              // ExpandableColumn<String>(
-              //   columnTitle: "Last name",
-              //   columnFlex: 2,
-              // ),
-              // ExpandableColumn<String>(
-              //   columnTitle: "Maiden name",
-              //   columnFlex: 2,
-              // ),
-            ],
-            visibleColumnCount: 2,
-            isEditable: false,
-            // multipleExpansion: true,
-          ),
-        ),
+        child: Text("Purchases"),
+        // child: ExpandableTheme(
+        //   data: ExpandableThemeData(
+        //     context,
+        //     // rowBorder: const BorderSide(color: Colors.amber),
+        //     // expandedBorderColor: Colors.transparent,
+        //     paginationSize: 48,
+        //   ),
+        //   child: ExpandableDataTable(
+        //     rows: [
+        //       ExpandableRow(cells: [
+        //         ExpandableCell(
+        //           columnTitle: "ID",
+        //           value: 10,
+        //         ),
+        //         ExpandableCell(
+        //           columnTitle: "Car Serial",
+        //           value: "1389 - ABC",
+        //         ),
+        //       ]),
+        //       ExpandableRow(
+        //         cells: [
+        //           ExpandableCell(
+        //             columnTitle: "ID",
+        //             value: 10,
+        //           ),
+        //           ExpandableCell(
+        //             columnTitle: "Car Serial",
+        //             value: "1389 - ABC",
+        //           ),
+        //         ],
+        //       ),
+        //     ],
+        //     headers: [
+        //       ExpandableColumn<int>(
+        //         columnTitle: "ID",
+        //         columnFlex: 1,
+        //       ),
+        //       ExpandableColumn<String>(
+        //         columnTitle: "Car Serial",
+        //         columnFlex: 2,
+        //       ),
+        //       // ExpandableColumn<String>(
+        //       //   columnTitle: "Last name",
+        //       //   columnFlex: 2,
+        //       // ),
+        //       // ExpandableColumn<String>(
+        //       //   columnTitle: "Maiden name",
+        //       //   columnFlex: 2,
+        //       // ),
+        //     ],
+        //     visibleColumnCount: 2,
+        //     isEditable: false,
+        //     // multipleExpansion: true,
+        //   ),
+        // ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},

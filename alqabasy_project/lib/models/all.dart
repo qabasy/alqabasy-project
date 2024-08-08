@@ -1,9 +1,9 @@
 // employees_model.dart
 class Employee {
   final int? id;
+  final bool? status;
   final String? name;
   final String? position;
-  final int? status;
   final DateTime? createDate;
   final DateTime? updateDate;
 
@@ -11,16 +11,14 @@ class Employee {
     required this.id,
     required this.name,
     required this.position,
-    required this.status,
+    this.status = true,
     this.createDate,
     this.updateDate,
   });
 }
 
 // customers_model.dart
-class Customer {
-  // Similar structure as Employee
-}
+class Customer {}
 
 // companies_model.dart
 class Company {

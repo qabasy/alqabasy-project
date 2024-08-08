@@ -1,236 +1,119 @@
-// import 'dart:ffi';
-
+import 'package:alqabasy_project/routes/dashboard.dart';
+import 'package:alqabasy_project/routes/purchases.dart';
+import 'package:alqabasy_project/routes/sales.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_side_menu/flutter_side_menu.dart';
+import 'package:sizer/sizer.dart';
 
-// import 'package:ecommerce/routes/';
-
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+  static const route = "/home";
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  int _selectedIndex = 1;
+
+  final List<Widget> _pages = [
+    const DashboardScreen(),
+    const PurchasesScreen(),
+    const SalesScreen(),
+
+    // Add more pages here
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Application'),
-        centerTitle: true,
+        title: const Text('AL-Qabasy Project'),
+        shadowColor: Colors.black,
+        elevation: 5,
+        primary: true,
       ),
-      body: DecoratedBox(
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-                image: const AssetImage("assets/images/background.jpg"),
-                fit: BoxFit.cover),
-          ),
-          child: Center(
-            child: Row(
-              textDirection: TextDirection.rtl,
+      body: IndexedStack(
+        index: _selectedIndex,
+        children: _pages,
+      ),
+      drawer: SideMenu(
+        position: SideMenuPosition.left,
+        mode: SideMenuMode.open,
+        hasResizer: true,
+        hasResizerToggle: false,
+        priority: SideMenuPriority.mode,
+        resizerData: const ResizerData(
+          resizerWidth: 2,
+        ),
+        builder: (data) => SideMenuData(
+          header: Padding(
+            padding: EdgeInsets.only(top: 1.h, bottom: 0.h, right: 1.w, left: 1.w),
+            child: const Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.max,
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, "/purchases");
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.lightGreenAccent,
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 16.0, horizontal: 20),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                    ),
-                    child: const Padding(
-                      padding: EdgeInsets.all(15),
-                      child: Text(
-                        'Purchases',
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
+                CircleAvatar(
+                  radius: 50,
+                  backgroundImage: AssetImage("assets/images/person.light.jpg"),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, "/sales");
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.redAccent,
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 16.0, horizontal: 40),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                    ),
-                    child: const Padding(
-                      padding: EdgeInsets.all(15),
-                      child: Text(
-                        'Sales',
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
+                SizedBox(height: 10),
+                Text(
+                  "Person Name",
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
               ],
             ),
-          )),
+          ),
+          items: [
+            SideMenuItemDataDivider(
+              divider: Divider(
+                indent: 5.w * 2,
+                thickness: 2,
+                color: Colors.blueGrey,
+                endIndent: 5.5.w * 2,
+              ),
+            ),
+            SideMenuItemDataTile(
+              isSelected: _selectedIndex == 0,
+              onTap: () => _onItemTapped(0),
+              title: 'Dashboard',
+              icon: const Icon(Icons.dashboard),
+              tooltip: "Open Dashboard",
+            ),
+            SideMenuItemDataTile(
+              isSelected: _selectedIndex == 1,
+              onTap: () => _onItemTapped(1),
+              title: 'Purchases',
+              icon: const Icon(Icons.access_time),
+              tooltip: "Open Purchases",
+            ),
+            SideMenuItemDataTile(
+              isSelected: _selectedIndex == 2,
+              onTap: () => _onItemTapped(2),
+              title: 'Sales',
+              tooltip: "Open Sales",
+              icon: const Icon(Icons.local_shipping_sharp),
+            ),
+          ],
+          footer: Padding(
+            padding: const EdgeInsetsDirectional.all(10),
+            child: Center(
+              child: ElevatedButton.icon(
+                onPressed: () {
+                  Navigator.pushReplacementNamed(context, "/");
+                },
+                icon: const Icon(Icons.logout),
+                label: const Text("Sign Out"),
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
-//
-// import 'package:flutter/material.dart';
-// import 'package:flutter/material.dart';
-// import 'package:flutter/rendering.dart';
-//
-// import 'package:animate_do/animate_do.dart';
-//
-//
-// class HomePage extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       backgroundColor: Colors.white,
-//       body: SingleChildScrollView(
-//       	child: Container(
-// 	        child: Column(
-// 	          children: <Widget>[
-// 	            Container(
-// 	              height: 400,
-// 	              decoration: BoxDecoration(
-// 	                image: DecorationImage(
-// 	                  image: AssetImage('assets/images/background.png'),
-// 	                  fit: BoxFit.fill
-// 	                )
-// 	              ),
-// 	              child: Stack(
-// 	                children: <Widget>[
-// 	                  Positioned(
-// 	                    left: 30,
-// 	                    width: 80,
-// 	                    height: 200,
-// 	                    child: FadeInUp(duration: Duration(seconds: 1), child: Container(
-// 	                      decoration: BoxDecoration(
-// 	                        image: DecorationImage(
-// 	                          image: AssetImage('assets/images/light-1.png')
-// 	                        )
-// 	                      ),
-// 	                    )),
-// 	                  ),
-// 	                  Positioned(
-// 	                    left: 140,
-// 	                    width: 80,
-// 	                    height: 150,
-// 	                    child: FadeInUp(duration: Duration(milliseconds: 1200), child: Container(
-// 	                      decoration: BoxDecoration(
-// 	                        image: DecorationImage(
-// 	                          image: AssetImage('assets/images/light-2.png')
-// 	                        )
-// 	                      ),
-// 	                    )),
-// 	                  ),
-// 	                  Positioned(
-// 	                    right: 40,
-// 	                    top: 40,
-// 	                    width: 80,
-// 	                    height: 150,
-// 	                    child: FadeInUp(duration: Duration(milliseconds: 1300), child: Container(
-// 	                      decoration: BoxDecoration(
-// 	                        image: DecorationImage(
-// 	                          image: AssetImage('assets/images/clock.png')
-// 	                        )
-// 	                      ),
-// 	                    )),
-// 	                  ),
-// 	                  Positioned(
-// 	                    child: FadeInUp(duration: Duration(milliseconds: 1600), child: Container(
-// 	                      margin: EdgeInsets.only(top: 50),
-// 	                      child: Center(
-// 	                        child: Text("Login", style: TextStyle(color: Colors.white, fontSize: 40, fontWeight: FontWeight.bold),),
-// 	                      ),
-// 	                    )),
-// 	                  )
-// 	                ],
-// 	              ),
-// 	            ),
-// 	            Padding(
-// 	              padding: EdgeInsets.all(30.0),
-// 	              child: Column(
-// 	                children: <Widget>[
-// 	                  FadeInUp(duration: Duration(milliseconds: 1800), child: Container(
-// 	                    padding: EdgeInsets.all(5),
-// 	                    decoration: BoxDecoration(
-// 	                      color: Colors.white,
-// 	                      borderRadius: BorderRadius.circular(10),
-//                         border: Border.all(color: Color.fromRGBO(143, 148, 251, 1)),
-// 	                      boxShadow: [
-// 	                        BoxShadow(
-// 	                          color: Color.fromRGBO(143, 148, 251, .2),
-// 	                          blurRadius: 20.0,
-// 	                          offset: Offset(0, 10)
-// 	                        )
-// 	                      ]
-// 	                    ),
-// 	                    child: Column(
-// 	                      children: <Widget>[
-// 	                        Container(
-// 	                          padding: EdgeInsets.all(8.0),
-// 	                          decoration: BoxDecoration(
-// 	                            border: Border(bottom: BorderSide(color:  Color.fromRGBO(143, 148, 251, 1)))
-// 	                          ),
-// 	                          child: TextField(
-// 	                            decoration: InputDecoration(
-// 	                              border: InputBorder.none,
-// 	                              hintText: "Email or Phone number",
-// 	                              hintStyle: TextStyle(color: Colors.grey[700])
-// 	                            ),
-// 	                          ),
-// 	                        ),
-// 	                        Container(
-// 	                          padding: EdgeInsets.all(8.0),
-// 	                          child: TextField(
-//                               obscureText: true,
-// 	                            decoration: InputDecoration(
-// 	                              border: InputBorder.none,
-// 	                              hintText: "Password",
-// 	                              hintStyle: TextStyle(color: Colors.grey[700])
-// 	                            ),
-// 	                          ),
-// 	                        )
-// 	                      ],
-// 	                    ),
-// 	                  )),
-// 	                  SizedBox(height: 30,),
-// 	                  FadeInUp(duration: Duration(milliseconds: 1900), child: Container(
-// 	                    height: 50,
-// 	                    decoration: BoxDecoration(
-// 	                      borderRadius: BorderRadius.circular(10),
-// 	                      gradient: LinearGradient(
-// 	                        colors: [
-// 	                          Color.fromRGBO(143, 148, 251, 1),
-// 	                          Color.fromRGBO(143, 148, 251, .6),
-// 	                        ]
-// 	                      )
-// 	                    ),
-// 	                    child: Center(
-// 	                      child: Text("Login", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
-// 	                    ),
-// 	                  )),
-// 	                  SizedBox(height: 70,),
-// 	                  FadeInUp(duration: Duration(milliseconds: 2000), child: Text("Forgot Password?", style: TextStyle(color: Color.fromRGBO(143, 148, 251, 1)),)),
-// 	                ],
-// 	              ),
-// 	            )
-// 	          ],
-// 	        ),
-// 	      ),
-//       )
-//     );
-//   }
-// }
