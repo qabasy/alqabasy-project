@@ -8,8 +8,11 @@ class SalesScreen extends StatefulWidget {
 class _SalesScreenState extends State<SalesScreen> {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text('Sales Screen'),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Sales"),
+        automaticallyImplyLeading: true,
+      ),
     );
   }
 }

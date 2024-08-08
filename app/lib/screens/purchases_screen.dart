@@ -76,20 +76,12 @@ class _PurchasesScreenState extends State<PurchasesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   leading: Text(""),
-      //   primary: true,
-      //   titleSpacing: 100,
-      //   title: Text(
-      //     "Purchases",
-      //     style: TextStyle(
-      //       fontWeight: FontWeight.w900,
-      //       fontSize: 10.sp,
-      //     ),
-      //   ),
-      //   // flexibleSpace: Text("test00000000000000000"),
-      //   centerTitle: true,
-      // ),
+      appBar: AppBar(
+        primary: true,
+        title: Text(
+          "Purchases",
+        )
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: _addNewPurchase,
         child: Icon(Icons.add),
