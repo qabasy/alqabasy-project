@@ -28,7 +28,8 @@ doc/api/
 
 
 # exculde projects
-alqabasy_project/
-database/
-untitled/
+/alqabasy_project/
+/database/
+/untitled/
+alqabasy/
 
